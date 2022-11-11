@@ -1,0 +1,21 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Bufunfei notifications DEV Documentation",
+        "description": "Documentação restrita aos administradores do produto.",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "authentication"
+            }
+        }
+    },
+    "paths": {
+       
+    }
+}
