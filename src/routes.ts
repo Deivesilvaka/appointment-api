@@ -31,4 +31,16 @@ router.get('/attendance/get', AttendanceHandler.getAllServices)
 // Cria nova consulta.
 router.post('/appointment/new', AppointmentHandler.create)
 
+// Busca todas as consultas em aberto.
+router.get('/appointment/get', AppointmentHandler.getAppointments)
+
+// Busca todas as consultas aceitas.
+router.get('/appointment/getAccepted', AppointmentHandler.getAcceptedAppointments)
+
+// Aceitar consulta em aberto.
+router.post('/appointment/accept', AppointmentHandler.acceptAppointment)
+
+// Finaliza consulta em aberto.
+router.post('/appointment/finish', AppointmentHandler.finishAppointment)
+
 export default router

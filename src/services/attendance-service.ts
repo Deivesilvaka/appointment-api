@@ -12,7 +12,11 @@ class AttendanceService {
     }
 
     static async getAllServices() {
-        return await Service.findAll()
+        const services = await Service.findAll()
+        
+        if(services.length === 0) return { status: 500, message: 'There are no services' }
+
+        return services
     }
 
     static async findMany(services: string) {

@@ -194,10 +194,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "attendance created!"
+                        "description": "attendance!"
                     },
                     "400": {
-                        "description": "Failed to create!"
+                        "description": "Failed to get!"
                     },
                     "401": {
                         "description": "Not authorized!"
@@ -238,6 +238,114 @@
                 "responses": {
                     "200": {
                         "description": "appointment created!"
+                    },
+                    "400": {
+                        "description": "Failed to create!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/appointment/get": {
+            "get": {
+                "tags": [
+                    "Appointment"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Appointments!"
+                    },
+                    "400": {
+                        "description": "Failed to get!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/appointment/getAccepted": {
+            "get": {
+                "tags": [
+                    "Appointment"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Appointments!"
+                    },
+                    "400": {
+                        "description": "Failed to get!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/appointment/accept": {
+            "post": {
+                "tags": [
+                    "Appointment"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "type": "number",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "appointment accept!"
+                    },
+                    "400": {
+                        "description": "Failed to accept!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/appointment/finish": {
+            "post": {
+                "tags": [
+                    "Appointment"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "type": "number",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "appointment is finished!"
                     },
                     "400": {
                         "description": "Failed to create!"
