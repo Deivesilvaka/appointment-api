@@ -1,6 +1,7 @@
 import AppointmentValidation from "../validations/appointment-validation"
 import Appointment from "../database/models/appointment-model"
 import AttendanceService from "./attendance-service"
+import User from '../database/models/user-model'
 
 interface appointmentInterface {
     services: string,
@@ -15,7 +16,10 @@ class AppointmentService {
 
         if(validation.status) return validation
 
-        const appointmentClone = JSON.parse(JSON.stringify(appointmentData))
+        const user = await User.findOne({ where: { name: validation.patient } })
+        if(!user) return { status: 500, message: 'Patient not found!' }
+
+        const appointmentClone = JSON.parse(JSON.stringify(validation))
         delete appointmentClone.services
 
         const services = await AttendanceService.findMany(appointmentData.services)
@@ -26,13 +30,14 @@ class AppointmentService {
         }))
 
         let timeExp: number = 0
-        services.map(service => timeExp += service.timeExp)
-
         let fullPrice: number = 0
-        services.map(service => fullPrice += service.price)
-
         let commission: number = 0
-        services.map(service => commission += service.price * service.commission)
+
+        services.map(service => {
+            timeExp += service.timeExp
+            fullPrice += service.price
+            commission += service.price * service.commission
+        })
 
         const appointment: any = {
             ...appointmentClone,
@@ -47,6 +52,48 @@ class AppointmentService {
         appointment.services = JSON.parse(appointment.services)
 
         return appointment
+    }
+
+    static async getAppointments(where: object) {
+        const apointments = await Appointment.findAll({ where })
+
+        if(apointments.length === 0) return { status: 200, message: 'There are no open appointment!' }
+        return apointments.map((appointment: any) => {
+            appointment.services = JSON.parse(appointment.services)
+            return appointment
+        })
+    }
+
+    static async acceptAppointment(id: number) {
+        
+        const validation: any = await AppointmentValidation.id(id)
+
+        if(validation.status) return validation
+
+        const appointment: any = await Appointment.update({ isAccept: true }, {
+            where: { id }
+        })
+
+        if(!appointment) return { status: 200, message: 'Failed to accept appointment!' }
+
+        return { status: 200, message: 'Appointment is accept!' }
+    }
+
+    static async finishAppointment(id: number) {
+        const validation: any = await AppointmentValidation.id(id)
+
+        if(validation.status) return validation
+
+        const appointment: any = await Appointment.update({ deletedAt: new Date() }, {
+            where: { id }
+        })
+
+        if(!appointment) return { status: 200, message: 'Failed to finish appointment!' }
+
+        let appointmentFinished: any = await Appointment.findOne({ where: { id } })
+        appointmentFinished.services = JSON.parse(appointmentFinished.services)
+
+        return { status: 200, message: 'Appointment is finished!', appointmentFinished }
     }
 }
 

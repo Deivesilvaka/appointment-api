@@ -5,7 +5,7 @@ import Base64 from 'crypto-js/enc-base64'
 class UserValidation {
     static async newUser(userData: object) {
         const schema = yup.yup.object({
-            name: yup.yup.string().min(8).required(),
+            name: yup.yup.string().min(8).transform(name => name.toUpperCase()).required(),
             email: yup.yup.string().email().required(),
             password: yup.yup.string().transform(pass => {
                 if(!pass || pass.length < 8) {

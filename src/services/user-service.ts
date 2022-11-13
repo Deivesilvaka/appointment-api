@@ -26,7 +26,7 @@ class UserService {
 
         if(!user) return { status: 400, message: 'email or password is not correct' }
 
-        const session: string = Base64.stringify(sha256(validation.email + validation.password))
+        const session: string = Base64.stringify(sha256(validation.email + validation.password + Date.now()))
         await User.update({
             session 
         }, {

@@ -33,5 +33,9 @@ export default {
     isAccept: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+    },
+    deletedAt: {
+        type: DataTypes.DATE,
+        defaultValue: null
     }
 }
