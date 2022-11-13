@@ -6,16 +6,12 @@ export default {
         autoIncrement: true,
         primaryKey: true
     },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     date: {
         type: DataTypes.STRING,
         allowNull: false
     },
     patient: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     services: {
