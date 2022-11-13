@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "Bufunfei notifications DEV Documentation",
-        "description": "Documentação restrita aos administradores do produto.",
+        "title": "Documentação da api de consultas médicas",
+        "description": "Chave de autenticação necessária! :)",
         "version": "1.0.0"
     },
     "basePath": "/",
@@ -16,6 +16,237 @@
         }
     },
     "paths": {
-       
+        "/user/new": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "user created!"
+                    },
+                    "400": {
+                        "description": "Failed to create!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "login!"
+                    },
+                    "400": {
+                        "description": "Failed to login!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "session": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "logout!"
+                    },
+                    "400": {
+                        "description": "Failed to logout!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/attendance/new": {
+            "post": {
+                "tags": [
+                    "Attendance"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "commission": {
+                                        "type": "number"
+                                    },
+                                    "timeExp": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "attendance created!"
+                    },
+                    "400": {
+                        "description": "Failed to create!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/attendance/get": {
+            "get": {
+                "tags": [
+                    "Attendance"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "attendance created!"
+                    },
+                    "400": {
+                        "description": "Failed to create!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        },
+        "/appointment/new": {
+            "post": {
+                "tags": [
+                    "Appointment"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "patient": {
+                                        "type": "string"
+                                    },
+                                    "services": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "appointment created!"
+                    },
+                    "400": {
+                        "description": "Failed to create!"
+                    },
+                    "401": {
+                        "description": "Not authorized!"
+                    }
+                }
+            }
+        }
     }
 }
